@@ -12,9 +12,9 @@ import java.time.temporal.ChronoUnit;
 /**
  * Created by psl on 27.09.16.
  */
-public class LocalDateDemo {
+public class LocalDateExample {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LocalDateDemo.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LocalDateExample.class);
 
     public static void main(String[] args) {
         LocalDate today = LocalDate.now();

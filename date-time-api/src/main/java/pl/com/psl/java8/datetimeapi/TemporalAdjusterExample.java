@@ -10,9 +10,9 @@ import java.time.temporal.TemporalAdjusters;
 /**
  * Created by psl on 27.09.16.
  */
-public class TemporalAdjusterDemo {
+public class TemporalAdjusterExample {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LocalDateDemo.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TemporalAdjusterExample.class);
 
     public static void main(String[] args) {
 

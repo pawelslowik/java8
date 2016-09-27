@@ -9,9 +9,9 @@ import java.time.Instant;
 /**
  * Created by psl on 25.09.16.
  */
-public class SimpleDurationDemo {
+public class SimpleDurationExample {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SimpleDurationDemo.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleDurationExample.class);
 
     public static void main(String[] args) throws InterruptedException {
         Instant instant1 = Instant.now();
