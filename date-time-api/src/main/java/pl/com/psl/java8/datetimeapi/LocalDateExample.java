@@ -14,7 +14,7 @@ import java.time.temporal.ChronoUnit;
  */
 public class LocalDateExample {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LocalDateExample.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LocalDateExample.class);
 
     public static void main(String[] args) {
         LocalDate today = LocalDate.now();
@@ -27,15 +27,15 @@ public class LocalDateExample {
         LocalDate firstAnniversaryOfEpoch = firsDayOfEpoch.withYear(1971);
         logDate("First anniversary of Epoch:", firstAnniversaryOfEpoch);
         Period periodOfEpoch = firsDayOfEpoch.until(today);
-        LOG.info("Years of Epoch:" + periodOfEpoch.getYears());
+        LOGGER.info("Years of Epoch:" + periodOfEpoch.getYears());
 
         LocalDate christmasDate = LocalDate.of(Year.now().getValue(), Month.DECEMBER, 24);
-        LOG.info("Christmas is after tomorrow:" + christmasDate.isAfter(tomorrow));
-        LOG.info("Days until Christmas:" + today.until(christmasDate, ChronoUnit.DAYS));
+        LOGGER.info("Christmas is after tomorrow:" + christmasDate.isAfter(tomorrow));
+        LOGGER.info("Days until Christmas:" + today.until(christmasDate, ChronoUnit.DAYS));
     }
 
     private static void logDate(String prefix, LocalDate date){
-        LOG.info(prefix + date.getDayOfWeek() + ", " + date);
+        LOGGER.info(prefix + date.getDayOfWeek() + ", " + date);
     }
 
 
