@@ -17,6 +17,7 @@ public class LocalDateExample {
     private static final Logger LOGGER = LoggerFactory.getLogger(LocalDateExample.class);
 
     public static void main(String[] args) {
+        LOGGER.info("Min LocalDate:" + LocalDate.MIN + ", max LocalDate:" + LocalDate.MAX);
         LocalDate today = LocalDate.now();
         logDate("Today is:", today);
         LocalDate tomorrow = today.plusDays(1);

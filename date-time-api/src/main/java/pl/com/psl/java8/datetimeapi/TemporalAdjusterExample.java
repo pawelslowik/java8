@@ -15,7 +15,6 @@ public class TemporalAdjusterExample {
     private static final Logger LOGGER = LoggerFactory.getLogger(TemporalAdjusterExample.class);
 
     public static void main(String[] args) {
-
         LocalDate today = LocalDate.now();
         LOGGER.info("Today is:" + today.getDayOfWeek() + ", " + today);
         LOGGER.info("Next Monday:" + today.with(TemporalAdjusters.next(DayOfWeek.MONDAY)));
