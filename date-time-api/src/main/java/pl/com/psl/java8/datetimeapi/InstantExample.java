@@ -14,32 +14,35 @@ public class InstantExample {
     private static final Logger LOGGER = LoggerFactory.getLogger(InstantExample.class);
 
     public static void main(String[] args) throws InterruptedException {
-        LOGGER.info("Instant min=" + Instant.MIN + " max=" + Instant.MAX);
+        LOGGER.info("Instant min=" + Instant.MIN + " , Epoch seconds:" + Instant.MIN.getEpochSecond());
+        LOGGER.info("Instant max=" + Instant.MAX + " , Epoch seconds:" + Instant.MAX.getEpochSecond());
         Instant instantNow = Instant.now();
+        logInstantNow(instantNow);
         Instant instantEpoch = Instant.ofEpochSecond(0);
-        LOGGER.info("Instant now:" + instantNow);
         LOGGER.info("Instant Epoch:" + instantEpoch);
         LOGGER.info("Now is after Epoch:" + instantNow.isAfter(instantEpoch));
         instantNow = instantNow.with(instantEpoch);
         LOGGER.info("Time travelled to Epoch!");
-        LOGGER.info("Instant now:" + instantNow);
+        logInstantNow(instantNow);
         LOGGER.info("Instant Epoch:" + instantEpoch);
         LOGGER.info("Fast forward 1 seconds, milli and nano");
         instantNow = instantNow.plus(1, ChronoUnit.SECONDS).plusMillis(1).plusNanos(1);
-        LOGGER.info("Instant now:" + instantNow);
-        LOGGER.info("Seconds from Epoch:" + instantNow.getEpochSecond());
+        logInstantNow(instantNow);
         LOGGER.info("Fast forward 1 day");
         instantNow = instantNow.plus(1, ChronoUnit.DAYS);
-        LOGGER.info("Instant now:" + instantNow);
-        try{
+        logInstantNow(instantNow);
+        try {
             LOGGER.info("Try to fast forward 1 week...");
             instantNow = instantNow.plus(1, ChronoUnit.WEEKS);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             LOGGER.error("Operation not allowed", e);
+        } finally {
+            logInstantNow(instantNow);
         }
-        finally {
-            LOGGER.info("Instant now:" + instantNow);
-        }
+    }
+
+    private static void logInstantNow(Instant instantNow) {
+        LOGGER.info("Instant now:" + instantNow + " ,Epoch seconds:" + instantNow.getEpochSecond()
+                + " , nanoseconds:" + instantNow.getNano());
     }
 }
