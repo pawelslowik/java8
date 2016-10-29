@@ -19,12 +19,15 @@ public class PeriodExample {
 
         Period periodBetweenEpochAndTomorrow = periodBetweenEpochAndNow.plus(Period.ofDays(1));
         log("Period between Epoch and tomorrow:", periodBetweenEpochAndTomorrow);
+
+        Period periodBetweenEpochAndYearAgo = periodBetweenEpochAndNow.minusYears(1);
+        log("Period between Epoch and year ago:", periodBetweenEpochAndYearAgo);
     }
 
     private static void log(String prefix, Period period){
         LOGGER.info(prefix + period + "="
-                + period.getYears() + " years and " +
-                +period.getMonths() + " months and "
+                + period.getYears() + " years, " +
+                + period.getMonths() + " months and "
                 + period.getDays() + " days=total of "
                 + period.toTotalMonths() + " months");
     }
