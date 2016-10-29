@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.temporal.*;
 
 /**
@@ -21,6 +22,7 @@ public class InstantExample {
         Instant instantEpoch = Instant.ofEpochSecond(0);
         LOGGER.info("Instant Epoch:" + instantEpoch);
         LOGGER.info("Now is after Epoch:" + instantNow.isAfter(instantEpoch));
+        LOGGER.info("Days from Epoch:" + instantEpoch.until(instantNow, ChronoUnit.DAYS));
         instantNow = instantNow.with(instantEpoch);
         LOGGER.info("Time travelled to Epoch!");
         logInstantNow(instantNow);
@@ -31,6 +33,7 @@ public class InstantExample {
         LOGGER.info("Fast forward 1 day");
         instantNow = instantNow.plus(1, ChronoUnit.DAYS);
         logInstantNow(instantNow);
+        LOGGER.info("Days from Epoch:" + instantEpoch.until(instantNow, ChronoUnit.DAYS));
         try {
             LOGGER.info("Try to fast forward 1 week...");
             instantNow = instantNow.plus(1, ChronoUnit.WEEKS);
