@@ -29,6 +29,7 @@ public class LocalTimeExample {
         LocalTime threeHoursAhead = now.plus(3, ChronoUnit.HOURS);
         LOGGER.info("Three hours ahead:" + threeHoursAhead + ", pass midnight:" + (threeHoursAhead.toNanoOfDay() < now.toNanoOfDay()));
         now = now.withNano(0);
-        LOGGER.info("After resetting current nanos:hour=" + now.getHour() + ",minute=" + now.get(ChronoField.MINUTE_OF_HOUR) + ", second=" + now.getSecond() + ", nano=" + now.getNano());
+        LOGGER.info("After resetting current nanos:hour=" + now.getHour() + ",minute=" + now.get(ChronoField.MINUTE_OF_HOUR)
+                + ", second=" + now.getSecond() + ", nano=" + now.getNano());
     }
 }
