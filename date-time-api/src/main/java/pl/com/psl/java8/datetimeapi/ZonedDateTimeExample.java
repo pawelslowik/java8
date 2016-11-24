@@ -3,10 +3,7 @@ package pl.com.psl.java8.datetimeapi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 
 /**
  * Created by psl on 23.11.16.
@@ -30,7 +27,18 @@ public class ZonedDateTimeExample {
         LOGGER.info("ZonedDateTime at America/Chicago zone id->adjusted ZonedDateTime at GMT zone id:" + zonedDateTimeChicago.withZoneSameInstant(ZoneId.of("GMT")));
         LOGGER.info("ZonedDateTime at America/Chicago zone id->not adjusted ZonedDateTime at GMT zone id:" + zonedDateTimeChicago.withZoneSameLocal(ZoneId.of("GMT")));
 
-        LOGGER.info("All available zone ids:");
-        ZoneId.getAvailableZoneIds().forEach(LOGGER::info);
+        LocalDate dateBeforeOctoberDaylightSaving = LocalDate.of(2016, Month.OCTOBER, 30);
+        ZonedDateTime zonedDateTimeBeforeOctoberDaylightSaving = ZonedDateTime.of(dateBeforeOctoberDaylightSaving, LocalTime.of(2,59,59), ZoneId.systemDefault());
+        LOGGER.info("ZonedDateTime before October daylight saving:" + zonedDateTimeBeforeOctoberDaylightSaving);
+        LOGGER.info("ZonedDateTime after October daylight saving:" + zonedDateTimeBeforeOctoberDaylightSaving.plusSeconds(1));
+
+        LocalDate dateBeforeMarchDaylightSaving = LocalDate.of(2017, Month.MARCH, 26);
+        ZonedDateTime zonedDateTimeBeforeMarchDaylightSaving = ZonedDateTime.of(dateBeforeMarchDaylightSaving, LocalTime.of(1,59,59), ZoneId.systemDefault());
+        LOGGER.info("ZonedDateTime before March daylight saving:" + zonedDateTimeBeforeMarchDaylightSaving);
+        LOGGER.info("ZonedDateTime after March daylight saving:" + zonedDateTimeBeforeMarchDaylightSaving.plusSeconds(1));
+
+        LOGGER.info("All available European zone ids:");
+        ZoneId.getAvailableZoneIds().stream().filter( e -> e.contains("Europe")).forEach(LOGGER::info);
+
     }
 }
