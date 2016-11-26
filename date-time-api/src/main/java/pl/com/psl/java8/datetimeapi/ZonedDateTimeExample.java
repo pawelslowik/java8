@@ -38,7 +38,7 @@ public class ZonedDateTimeExample {
         LOGGER.info("ZonedDateTime after March daylight saving:" + zonedDateTimeBeforeMarchDaylightSaving.plusSeconds(1));
 
         LOGGER.info("All available European zone ids:");
-        ZoneId.getAvailableZoneIds().stream().filter( e -> e.contains("Europe")).forEach(LOGGER::info);
+        ZoneId.getAvailableZoneIds().stream().filter( e -> e.contains("Europe")).sorted().forEach(LOGGER::info);
 
     }
 }
