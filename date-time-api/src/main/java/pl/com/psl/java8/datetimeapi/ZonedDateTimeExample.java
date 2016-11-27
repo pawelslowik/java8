@@ -31,11 +31,17 @@ public class ZonedDateTimeExample {
         ZonedDateTime zonedDateTimeBeforeOctoberDaylightSaving = ZonedDateTime.of(dateBeforeOctoberDaylightSaving, LocalTime.of(2,59,59), ZoneId.systemDefault());
         LOGGER.info("ZonedDateTime before October daylight saving:" + zonedDateTimeBeforeOctoberDaylightSaving);
         LOGGER.info("ZonedDateTime after October daylight saving:" + zonedDateTimeBeforeOctoberDaylightSaving.plusSeconds(1));
+        LOGGER.info("ZonedDateTime at October overlap with with later offset:" + zonedDateTimeBeforeOctoberDaylightSaving.withLaterOffsetAtOverlap());
+
 
         LocalDate dateBeforeMarchDaylightSaving = LocalDate.of(2017, Month.MARCH, 26);
         ZonedDateTime zonedDateTimeBeforeMarchDaylightSaving = ZonedDateTime.of(dateBeforeMarchDaylightSaving, LocalTime.of(1,59,59), ZoneId.systemDefault());
         LOGGER.info("ZonedDateTime before March daylight saving:" + zonedDateTimeBeforeMarchDaylightSaving);
         LOGGER.info("ZonedDateTime after March daylight saving:" + zonedDateTimeBeforeMarchDaylightSaving.plusSeconds(1));
+        LOGGER.info("ZonedDateTime after March daylight saving with fixed offset zone:" + zonedDateTimeBeforeMarchDaylightSaving.withFixedOffsetZone().plusSeconds(1));
+
+
+
 
         LOGGER.info("All available European zone ids:");
         ZoneId.getAvailableZoneIds().stream().filter( e -> e.contains("Europe")).sorted().forEach(LOGGER::info);
