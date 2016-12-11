@@ -11,6 +11,8 @@ import java.util.Set;
 /**
  * This class demonstrates usage of simple lambda expression.
  * For the purpose of demonstration, it does not use lambda features provided by Collection API.
+ *
+ * Created by psl on 11.12.2016.
  */
 public class SimpleLambdaExample {
 
