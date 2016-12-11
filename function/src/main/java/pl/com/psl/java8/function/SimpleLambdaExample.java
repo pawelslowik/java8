@@ -39,8 +39,8 @@ public class SimpleLambdaExample {
     }
 
     public static class Department {
-        String name;
-        Set<Employee> employees = new HashSet<>();
+        private String name;
+        private Set<Employee> employees = new HashSet<>();
 
         public Department(String name) {
             this.name = name;
