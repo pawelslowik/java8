@@ -5,8 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This class demonstrates usage of simple lambda expression.
@@ -31,6 +30,10 @@ public class SimpleLambdaExample {
         salesDepartment.addEmployee(joe);
 
         LOGGER.info("Department=" + salesDepartment.getName() + ", employees=" + salesDepartment.getEmployees());
+        Comparator<Employee> salaryComparator = ( e1, e2 ) -> Integer.compare(e1.getSalary(), e2.getSalary());
+        List<Employee> employeeList = new ArrayList<>(salesDepartment.getEmployees());
+        employeeList.sort(salaryComparator);
+        LOGGER.info("Employees by increasing salary=" + employeeList);
         Criterion<Employee> incorrectNameFormatCriterion = e -> e.getName() == null || !e.getName().matches("[A-Za-z]+");
         LOGGER.info("Employees with incorrect name format=" + salesDepartment.getEmployeesByCriterion(incorrectNameFormatCriterion));
         LOGGER.info("Employees earning more than 100=" + salesDepartment.getEmployeesByCriterion(e -> e.getSalary() > 100));
