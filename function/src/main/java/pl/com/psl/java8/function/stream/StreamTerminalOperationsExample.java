@@ -1,4 +1,4 @@
-package pl.com.psl.java8.function;
+package pl.com.psl.java8.function.stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,48 +37,5 @@ public class StreamTerminalOperationsExample {
                 employees.stream().allMatch(e -> Employee.Role.DEVELOPER.equals(e.getRole())));
         LOGGER.info("Employee with highest salary={}", employees.stream().reduce((e1, e2) -> e1.getSalary() > e2.getSalary() ? e1 : e2));
         LOGGER.info("Salary statistics for all employees={}", employees.stream().collect(Collectors.summarizingInt(Employee::getSalary)));
-    }
-
-    private static class Employee {
-
-        enum Role {DEVELOPER, MANAGER, RECRUITER}
-
-        private String name;
-        private Role role;
-        private int age;
-        private int salary;
-
-        private Employee(String name, Role role, int age, int salary) {
-            this.name = name;
-            this.role = role;
-            this.age = age;
-            this.salary = salary;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public Role getRole() {
-            return role;
-        }
-
-        public void setRole(Role role) {
-            this.role = role;
-        }
-
-        public int getSalary() {
-            return salary;
-        }
-
-        @Override
-        public String toString() {
-            return "Employee{" +
-                    "name='" + name + '\'' +
-                    ", role=" + role +
-                    ", age=" + age +
-                    ", salary=" + salary +
-                    '}';
-        }
     }
 }
