@@ -30,6 +30,10 @@ public class Employee {
         this.salary = 0;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getAge() {
         return age;
     }
