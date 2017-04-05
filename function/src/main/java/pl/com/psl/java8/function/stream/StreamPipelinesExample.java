@@ -61,5 +61,10 @@ public class StreamPipelinesExample {
         LOGGER.info("Manager with highest salary={}", employees.stream()
                 .filter(e -> Employee.Role.MANAGER.equals(e.getRole()))
                 .max(Comparator.comparingInt(Employee::getSalary)));
+
+        LOGGER.info("Non developers above 30 years old={}", employees.stream()
+                .filter(e -> !Employee.Role.DEVELOPER.equals(e.getRole()))
+                .collect(Collectors.partitioningBy(e -> e.getAge() > 30,
+                        Collectors.mapping(Employee::getName, Collectors.toSet()))));
     }
 }
