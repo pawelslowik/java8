@@ -34,9 +34,12 @@ public class StreamIntermediateOperationsExample {
         Stream<Employee.Role> rolesStream = employees.stream().map(Employee::getRole);
         LOGGER.info("Roles of all employees={}", rolesStream.collect(Collectors.toList()));
 
-        Stream<Employee.Role> distinctRolesStream = employees.stream().peek(e -> LOGGER.info("Processing employee={}", e))
-                .map(Employee::getRole).peek(r -> LOGGER.info("Mapped employee to role={}", r))
-                .distinct().peek(r -> LOGGER.info("Distinct role={}", r));
+        Stream<Employee.Role> distinctRolesStream = employees.stream()
+                .peek(e -> LOGGER.info("Processing employee={}", e))
+                .map(Employee::getRole)
+                .peek(r -> LOGGER.info("Mapped employee to role={}", r))
+                .distinct()
+                .peek(r -> LOGGER.info("Distinct role={}", r));
         LOGGER.info("Distinct roles={}", distinctRolesStream.collect(Collectors.toList()));
 
         List<Employee> generatedEmployeesList = Stream.generate(() -> new Employee("Employee" + new Random().nextInt())).limit(4).collect(Collectors.toList());
