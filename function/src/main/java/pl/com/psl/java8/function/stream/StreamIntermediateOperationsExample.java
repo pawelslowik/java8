@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,7 +23,7 @@ public class StreamIntermediateOperationsExample {
         Employee tim = new Employee("tim", Employee.Role.RECRUITER, 39, 3000);
         List<Employee> employees = Arrays.asList(tom, bob, pat, tim);
 
-        LOGGER.info("All employees stream=", employees);
+        LOGGER.info("All employees stream={}", employees);
 
         Stream<Employee> developersStream = employees.stream().filter(e -> Employee.Role.DEVELOPER.equals(e.getRole()));
         LOGGER.info("Filtered developers=" + developersStream.collect(Collectors.toList()));
