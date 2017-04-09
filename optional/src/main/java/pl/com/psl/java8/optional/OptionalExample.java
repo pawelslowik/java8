@@ -81,8 +81,8 @@ public class OptionalExample {
                         return customerAddress;
                     });
 
-            LOGGER.info("------Finished processing order for customer={} with products={} and deliveryAddress={} and recipientPhoneNumber={}------",
-                    customerId, products, deliveryAddress, recipientPhoneNumber);
+            LOGGER.info("------Finished processing order for customer={} with products={} and deliveryAddress={} and recipientPhoneNumber={} and totalPrice={}------",
+                    customerId, products, deliveryAddress, recipientPhoneNumber, totalPrice);
 
         } catch (Exception e) {
             LOGGER.error("Processing order failed", e);
@@ -120,6 +120,9 @@ public class OptionalExample {
         public static BigDecimal getDiscount(String customerId) {
             if ("bob".equals(customerId)) {
                 return BigDecimal.valueOf(0.1);
+            }
+            if ("tim".equals(customerId)) {
+                return BigDecimal.valueOf(0.2);
             }
             return null;
         }
