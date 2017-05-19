@@ -40,23 +40,29 @@ public class BasicPathsAndFilesExample {
             Instant writeInstant = Instant.now();
             String fileContent = "Hello at " + writeInstant;
             LOGGER.info("Writing content={} to path={}", fileContent, movePath);
-            LOGGER.info("Size before writing={} bytes, lats modification time={}", Files.size(movePath), Files.getLastModifiedTime(movePath));
+            LOGGER.info("Size before writing={} bytes, last modification time={}", Files.size(movePath), Files.getLastModifiedTime(movePath));
             try(BufferedWriter writer = Files.newBufferedWriter(movePath)){
                 writer.write(fileContent);
             }
             Files.setLastModifiedTime(movePath, FileTime.from(writeInstant.plusSeconds(1)));
-            LOGGER.info("Size after writing={} bytes, lats modification time={}, content={}gi",
+            LOGGER.info("Size after writing={} bytes, last modification time={}, content={}",
                     Files.size(movePath), Files.getLastModifiedTime(movePath), Files.lines(movePath).collect(Collectors.toList()));
 
             LOGGER.info("Making a shallow copy from path={} to path={}", movePath, copyPath);
             Files.copy(movePath, copyPath, StandardCopyOption.REPLACE_EXISTING);
-            LOGGER.info("Size after copying={} bytes, lats modification time={}", Files.size(copyPath), Files.getLastModifiedTime(copyPath));
+            LOGGER.info("Size after copying={} bytes, last modification time={}", Files.size(copyPath), Files.getLastModifiedTime(copyPath));
 
-            LOGGER.info("Reading content of copied path={}", copyPath);
+            LOGGER.info("Reading content of copied path={}:", copyPath);
             List<String> copiedLines = Files.readAllLines(copyPath);
             copiedLines.forEach(LOGGER::info);
 
             LOGGER.info("Original and copied file point to the same path={}", Files.isSameFile(movePath, copyPath));
+
+            fileContent = " Hello at " + Instant.now();
+            LOGGER.info("Appending content={} to path={}", fileContent, copyPath);
+            Files.write(copyPath, Arrays.asList(fileContent), StandardOpenOption.APPEND);
+            LOGGER.info("Size after writing={} bytes, last modification time={}, content={}",
+                    Files.size(copyPath), Files.getLastModifiedTime(copyPath), Files.lines(copyPath).collect(Collectors.toList()));
 
             Path copyAbsolutePath = copyPath.toAbsolutePath().normalize();
             LOGGER.info("Root of path={} is={}", copyAbsolutePath, copyAbsolutePath.getRoot());
