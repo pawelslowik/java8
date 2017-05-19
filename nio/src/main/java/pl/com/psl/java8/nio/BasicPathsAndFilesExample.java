@@ -45,7 +45,8 @@ public class BasicPathsAndFilesExample {
                 writer.write(fileContent);
             }
             Files.setLastModifiedTime(movePath, FileTime.from(writeInstant.plusSeconds(1)));
-            LOGGER.info("Size after writing={} bytes, lats modification time={}", Files.size(movePath), Files.getLastModifiedTime(movePath));
+            LOGGER.info("Size after writing={} bytes, lats modification time={}, content={}gi",
+                    Files.size(movePath), Files.getLastModifiedTime(movePath), Files.lines(movePath).collect(Collectors.toList()));
 
             LOGGER.info("Making a shallow copy from path={} to path={}", movePath, copyPath);
             Files.copy(movePath, copyPath, StandardCopyOption.REPLACE_EXISTING);
