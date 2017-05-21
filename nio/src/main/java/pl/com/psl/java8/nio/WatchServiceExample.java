@@ -46,7 +46,7 @@ public class WatchServiceExample {
                             Thread.currentThread().interrupt();
                             continue;
                         }
-                        LOGGER.info("Received WatchKey");
+                        LOGGER.info("Received WatchKey for Watchable={}", watchKey.watchable());
                         List<WatchEvent<?>> watchEvents = watchKey.pollEvents();
                         for (WatchEvent<?> watchEvent : watchEvents) {
                             WatchEvent.Kind<?> kind = watchEvent.kind();
