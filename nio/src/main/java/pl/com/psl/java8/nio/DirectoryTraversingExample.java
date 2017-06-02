@@ -19,6 +19,7 @@ public class DirectoryTraversingExample {
     public static void main(String[] args) throws IOException {
         Path currentDirectory = Paths.get(".");
         listDirectory(currentDirectory);
+        listXmlFilesInDirectory(currentDirectory);
         listDirectoryTreeWithMaxDepth(currentDirectory, 1);
         listDirectoryTreeWithMaxDepth(currentDirectory, 2);
         walkXmlFilesInDirectoryTree(currentDirectory);
@@ -35,19 +36,26 @@ public class DirectoryTraversingExample {
     private static void listDirectory(Path directory) throws IOException {
         LOGGER.info("Listing paths in directory={}", directory);
         try (Stream<Path> paths = Files.list(directory)) {
-            paths.forEach(p -> LOGGER.info("Path=" + p));
+            paths.forEach(p -> LOGGER.info("Path={}", p));
+        }
+    }
+
+    private static void listXmlFilesInDirectory(Path directory) throws IOException {
+        LOGGER.info("Listing xml files directory={}", directory);
+        try(DirectoryStream<Path> directoryStream = Files.newDirectoryStream(directory, "*.xml")){
+            directoryStream.forEach( p -> LOGGER.info("Found xml file={}", p));
         }
     }
 
     private static void listDirectoryTreeWithMaxDepth(Path directory, int maxDepth) throws IOException {
         LOGGER.info("Listing paths in directory={} to maxDepth={}", directory, maxDepth);
         try (Stream<Path> paths = Files.walk(directory, maxDepth)) {
-            paths.forEach(p -> LOGGER.info("Path=" + p));
+            paths.forEach(p -> LOGGER.info("Path={}", p));
         }
     }
 
     private static void walkXmlFilesInDirectoryTree(Path directory) throws IOException {
-        LOGGER.info("Walking xml files in directory tree for directory={}", directory);
+        LOGGER.info("Walking xml files in directory tree under directory={}", directory);
         Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
@@ -60,7 +68,7 @@ public class DirectoryTraversingExample {
     }
 
     private static void walkClassFilesInDirectoryTree(Path directory) throws IOException {
-        LOGGER.info("Walking class files in directory tree for directory={}", directory);
+        LOGGER.info("Walking class files in directory tree under directory={}", directory);
         PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher("glob:**.class");
         Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
             @Override
@@ -74,7 +82,7 @@ public class DirectoryTraversingExample {
     }
 
     private static void walkDirectoriesInDirectoryTree(Path directory) throws IOException {
-        LOGGER.info("Walking directories in directory tree for directory={}", directory);
+        LOGGER.info("Walking directories in directory tree under directory={}", directory);
         Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
@@ -100,7 +108,7 @@ public class DirectoryTraversingExample {
     }
 
     private static void removeDirectoryTree(Path directory) throws IOException {
-        LOGGER.info("Removing directory tree of directory={}", directory);
+        LOGGER.info("Removing directory tree under directory={}", directory);
         Files.walkFileTree(directory, new FileVisitor<Path>() {
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
